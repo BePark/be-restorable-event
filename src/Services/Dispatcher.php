@@ -16,7 +16,7 @@ class Dispatcher extends \Illuminate\Events\Dispatcher
     public function listenWithChildren($events, $listener)
     {
         $this->listen('*', function($eventName, array $data) use ($events, $listener) {
-            var_dump('XX',$eventName, $events, $listener);
+
             if(class_exists($eventName) && in_array($events, class_parents($eventName, true)))
             {
                 dd($eventName, $events, $listener);
