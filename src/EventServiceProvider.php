@@ -4,21 +4,12 @@ namespace Bepark\Eventer;
 
 use Bepark\Eventer\Events\RestorableEvent;
 use Bepark\Eventer\Listeners\StorableEventListener;
+use Bepark\Eventer\Services\Dispatcher;
+use Illuminate\Contracts\Queue\Factory as QueueFactoryContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
-    /**
-     * The event listener mappings for the application.
-     *
-     * @var array
-     */
-    protected $listen = [
-        RestorableEvent::class => [
-            StorableEventListener::class
-        ]
-    ];
-
     /**
      * Higher = first (100)
      * Lower = last (-1)
@@ -26,9 +17,10 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $priorities = [
-        StorableEventListener::class => -1, // -1 = last because we want to save it only if everything is ok
-    ];
+    protected $priorities = [];
+
+    protected $subscribe = [];
+
     /**
      * Register any events for your application.
      *
@@ -36,8 +28,27 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
+        $this->listen[RestorableEvent::class] = [
+            StorableEventListener::class
+        ];
 
-        //
+        $this->priorities[StorableEventListener::class] = -1;
+
+        // loading our own dispatcher ;)
+        $this->app->singleton(
+            'events',
+            function($app)
+            {
+                return (new Dispatcher($app))->setQueueResolver(
+                    function() use ($app)
+                    {
+                        return $app->make(QueueFactoryContract::class);
+                    }
+                );
+            }
+        );
+        //Continue as usual
+        parent::boot();
+        \Event::setPriorities($this->priorities);
     }
 }

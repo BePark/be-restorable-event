@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bepark\\StorableEvent\\AppServiceProvider"
+                "Bepark\\Eventer\\AppServiceProvider"
             ]
         }
     }
