@@ -2,7 +2,7 @@
 
 namespace Bepark\Eventer\Listeners;
 
-use Bepark\Eventer\Events\ReEventer;
+use Bepark\Eventer\Events\RestorableEvent;
 use Bepark\Eventer\Models\Event;
 
 class StorableEventListener
