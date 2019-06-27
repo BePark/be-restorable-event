@@ -17,16 +17,17 @@ class EventHelper
      */
     public static function listenWithChildren($event, $parentClassName, $listener)
     {
-        $event->listen('*', function($eventName, array $data) use ($parentClassName, $listener) {
+        $event->listen('*', function($eventName, array $data) use ($event, $parentClassName, $listener) {
 
             if(class_exists($eventName) && in_array($parentClassName, class_parents($eventName, true)))
             {
-                dd($eventName, $parentClassName, $listener);
-                $this->createClassListener($listener);
                 /** @var RestorableEvent $event */
-                /*$event = $data[0];
+                $event = $data[0];
 
-                $listener($event);*/
+                list($listener, $method) = explode('@', $listener);
+
+                $listener = app()->make($listener);
+                $listener->$method($event);
             }
         });
     }
