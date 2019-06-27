@@ -7,3 +7,22 @@
 
    Add an Extends from `Bepark\Eventer\EventServiceProvider` to the event provider class `App\Provider\EventServiceProvider`
       
+## Usage in listener
+
+	/**
+	 * @param Dispatcher $events
+	 */
+	public function subscribe(Dispatcher $events)
+	{
+		$events->listen(
+			EditMyModelEvent::class,
+			__CLASS__ . '@onEditEvent'
+		);
+		$events->listen(
+			CreateMyModelEvent::class,
+			__CLASS__ . '@onCreateEvent'
+		);
+	}
+	
+	public function onEditEvent($event) {};
+	public function onCreateEvent($event) {};
