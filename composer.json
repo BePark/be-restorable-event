@@ -1,5 +1,5 @@
 {
-    "name": "bepark/storable-event",
+    "name": "bepark/be-storable-event",
     "description": "Register event in database making them restorable",
     "type": "library",
     "require": {
