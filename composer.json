@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Bepark\\StorableEvent\\": "src/"
+            "Bepark\\Eventer\\": "src/"
         }
     },
     "extra": {
