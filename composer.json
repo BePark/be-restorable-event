@@ -1,0 +1,27 @@
+{
+    "name": "bepark/storable-event",
+    "description": "Register event in database making them restorable",
+    "type": "library",
+    "require": {
+        "laravel/framework": "5.8"
+    },
+    "authors": [
+        {
+            "name": "Jérémy Dillenbourg",
+            "email": "jdi@bepark.eu"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bepark\\StorableEvent\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bepark\\StorableEvent\\AppServiceProvider",
+                "Bepark\\StorableEvent\\EventServiceProvider"
+            ]
+        }
+    }
+}
