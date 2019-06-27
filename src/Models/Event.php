@@ -1,10 +1,10 @@
 <?php
 
-namespace  Bepark\StorableEvent\Models;
+namespace  Bepark\Eventer\Models;
 
-use Bepark\StorableEvent\Serialized\JsonSerializableContract;
-use Bepark\StorableEvent\Serialized\RestorableContract;
-use Bepark\StorableEvent\Serialized\RestoreArraySerializable;
+use Bepark\Eventer\Serialized\JsonSerializableContract;
+use Bepark\Eventer\Serialized\RestorableContract;
+use Bepark\Eventer\Serialized\RestoreArraySerializable;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model

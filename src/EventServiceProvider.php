@@ -1,9 +1,9 @@
 <?php
 
-namespace Bepark\StorableEvent;
+namespace Bepark\Eventer;
 
-use Bepark\StorableEvent\Events\RestorableEvent;
-use Bepark\StorableEvent\Listeners\StorableEventListener;
+use Bepark\Eventer\Events\RestorableEvent;
+use Bepark\Eventer\Listeners\EventerListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -14,9 +14,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        RestorableEvent::class => [
-            StorableEventListener::class,
-        ]
     ];
 
     /**

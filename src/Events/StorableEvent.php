@@ -1,6 +1,6 @@
 <?php
 
-namespace Bepark\StorableEvent\Events;
+namespace Bepark\Eventer\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;

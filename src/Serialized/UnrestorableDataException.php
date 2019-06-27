@@ -1,6 +1,6 @@
 <?php
 
-namespace Bepark\StorableEvent\Serialized;
+namespace Bepark\Eventer\Serialized;
 
 use Throwable;
 use OutOfBoundsException;

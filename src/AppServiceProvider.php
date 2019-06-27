@@ -1,6 +1,6 @@
 <?php
 
-namespace Bepark\StorableEvent;
+namespace Bepark\Eventer;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +16,6 @@ class AppServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
 
         $this->app->register(EventServiceProvider::class);
-
-
     }
 
     /**

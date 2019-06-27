@@ -1,9 +1,9 @@
 <?php
 
-namespace Bepark\StorableEvent\Events;
+namespace Bepark\Eventer\Events;
 
-use Bepark\StorableEvent\Serialized\JsonSerializableContract;
-use Bepark\StorableEvent\Serialized\RestorableContract;
+use Bepark\Eventer\Serialized\JsonSerializableContract;
+use Bepark\Eventer\Serialized\RestorableContract;
 use Carbon\Carbon;
 
 abstract class RestorableEvent implements RestorableContract, JsonSerializableContract

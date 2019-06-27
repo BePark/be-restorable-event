@@ -1,10 +1,10 @@
 {
-    "name": "bebepark/storable-event",
-    "description": "Register event in database making them restorable",
+    "name": "be-park/eventer",
+    "description": "Improve laravel listener and register event in database making them restorable",
     "type": "library",
     "license": "MIT",
     "require": {
-        "laravel/framework": "^5.8"
+        "laravel/framework": "5.8"
     },
     "authors": [
         {
@@ -20,8 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bepark\\StorableEvent\\AppServiceProvider",
-                "Bepark\\StorableEvent\\EventServiceProvider"
+                "Bepark\\StorableEvent\\AppServiceProvider"
             ]
         }
     }
