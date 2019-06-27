@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
 
-        //$this->app->register(PackageEventServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
 
 
     }
