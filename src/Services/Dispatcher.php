@@ -2,78 +2,30 @@
 
 namespace Bepark\Eventer\Services;
 
-use Bepark\Eventer\ValueObjects\ListenerInfo;
+use Bepark\Eventer\Models\Event;
 
-/**
- * Extends \Illuminate\Events\Dispatcher to add the support of interface for listeners
- *
- * @package App\Services
- */
 class Dispatcher extends \Illuminate\Events\Dispatcher
 {
-	protected $priorities = [];
-
-	public function setPriorities($priorities)
-	{
-		$this->priorities = $priorities;
-	}
-
-	public function getListeners($eventName)
-	{
-		$parent = parent::getListeners($eventName);
-
-		$priorities = array_map(
-			function ($listener)
-			{
-				if ($listener instanceof ListenerInfo && isset($this->priorities[ $listener->getName() ]))
-				{
-					return $this->priorities[ $listener->getName() ];
-				}
-
-				return 0;
-			},
-			$parent
-		);
-
-		array_multisort($priorities, SORT_DESC, $parent);
-		return $parent;
-	}
-
-	public function createClassListener($listener, $wildcard = false)
-	{
-		return new ListenerInfo(
-			parent::createClassListener($listener, $wildcard),
-			$listener
-		);
-	}
-
     /**
-     * The only change is the management of ListenerInfo to not be cast to array.
-     * @param string $eventName
-     * @param array $listeners
-     * @return array
-     * @see \Illuminate\Events\Dispatcher::addInterfaceListeners
+     * Register an event listener with the dispatcher.
+     *
+     * @param  string|array  $events
+     * @param  mixed  $listener
+     * @return void
      */
-	protected function addInterfaceListeners($eventName, array $listeners = [])
-	{
-		foreach (class_implements($eventName) as $interface)
-		{
-			if (isset($this->listeners[ $interface ]))
-			{
-				foreach ($this->listeners[ $interface ] as $names)
-				{
-					if ($names instanceof ListenerInfo)
-					{
-						$listeners[] = $names;
-					}
-					else
-					{
-						$listeners = array_merge($listeners, (array)$names);
-					}
-				}
-			}
-		}
+    public function listenWithChildren($events, $listener)
+    {
+        $this->listen('*', function($eventName, array $data) use ($events, $listener) {
+            var_dump('XX',$eventName, $events, $listener);
+            if(class_exists($eventName) && in_array($events, class_parents($eventName, true)))
+            {
+                dd($eventName, $events, $listener);
+                $this->createClassListener($listener);
+                /** @var RestorableEvent $event */
+                /*$event = $data[0];
 
-		return $listeners;
-	}
+                $listener($event);*/
+            }
+        });
+    }
 }
