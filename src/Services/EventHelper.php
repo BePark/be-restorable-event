@@ -15,7 +15,7 @@ class EventHelper
      * @param  mixed  $listener
      * @return void
      */
-    public static function listenWithChildren($event, $parentClassName, $listener)
+    public static function listenWithChildren(Dispatcher $event, string $parentClassName, string $listener)
     {
         $event->listen('*', function($eventName, array $data) use ($event, $parentClassName, $listener) {
 
