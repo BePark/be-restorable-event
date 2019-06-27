@@ -1,6 +1,6 @@
 <?php
 
-namespace Bepark\StorableEvent\Providers;
+namespace Bepark\StorableEvent;
 
 use Illuminate\Support\ServiceProvider;
 
