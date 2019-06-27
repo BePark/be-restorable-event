@@ -4,7 +4,8 @@ namespace Bepark\Eventer\Listeners;
 
 use Bepark\Eventer\Events\RestorableEvent;
 use Bepark\Eventer\Models\Event;
-use Bepark\Eventer\Services\Dispatcher;
+use Bepark\Eventer\Services\EventHelper;
+use Illuminate\Events\Dispatcher;
 
 class StorableEventListener
 {
@@ -15,6 +16,6 @@ class StorableEventListener
 
     public function subscribe(Dispatcher $event)
     {
-        $event->listenWithChildren(RestorableEvent::class, __CLASS__ . '@onStorableEvent');
+        EventHelper::listenWithChildren($event, RestorableEvent::class, __CLASS__ . '@onStorableEvent');
     }
 }
