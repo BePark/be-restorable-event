@@ -14,15 +14,9 @@
    You can listen on the parent class of the triggered event by using the EventHelper.
    Check the StorableEventListener to see how it works.
    
-       class StorableEventListener
-       {
-           public function onStorableEvent(RestorableEvent $event)
-           {
-               Event::createFromStorableEvent($event);
-           }
-       
-           public function subscribe(Dispatcher $event)
-           {
-               EventHelper::listenWithChildren($event, RestorableEvent::class, __CLASS__ . '@onStorableEvent');
-           }
-       }
+   `listenWithChildren()` will start listening on all event and will call the listener when it match.
+   
+   Call it in the subscribe() method of your listener
+   
+    EventHelper::listenWithChildren(Dispatcher $event, <ParentClass>, 'ListenerClass@method');
+   
