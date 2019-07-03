@@ -31,4 +31,16 @@ class EventHelper
             }
         });
     }
+
+    public static function listenAllEloquentEvent(Dispatcher $event, string $listener)
+    {
+        $event->listen('eloquent.*', function($eventName, array $data) use ($listener) {
+
+            list($listener, $method) = explode('@', $listener);
+
+            $listener = app()->make($listener);
+            $listener->$method($eventName, $data);
+        });
+
+    }
 }

@@ -20,6 +20,11 @@ class EventServiceProvider extends ServiceProvider
     {
         $this->subscribe[] = StorableEventListener::class;
 
+        if(config('event.listen_on_eloquent', false))
+        {
+
+        }
+
         parent::boot();
     }
 }
