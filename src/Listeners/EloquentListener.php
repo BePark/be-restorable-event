@@ -5,14 +5,15 @@ namespace Bepark\Eventer\Listeners;
 
 
 use Bepark\Eventer\Events\RestorableEvent;
+use Bepark\Eventer\Models\Event;
 use Bepark\Eventer\Services\EventHelper;
 use Illuminate\Events\Dispatcher;
 
 class EloquentListener
 {
-    public function storeEloquentEvent($eventName, $data)
+    public function storeEloquentEvent(string $eventName, string $modelName, \Eloquent $model)
     {
-        dd($data);
+        Event::createFromEloquentEvent($modelName . ':' . $eventName, $model->getChanges());
     }
 
     public function subscribe(Dispatcher $event)

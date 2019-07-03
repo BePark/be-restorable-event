@@ -36,11 +36,18 @@ class EventHelper
     {
         $event->listen('eloquent.*', function($eventName, array $data) use ($listener) {
 
+            preg_match('#eloquent.(.*): (.*)#', $eventName, $matches);
+
+            $eventName = $matches[1];
+            $modelName = $matches[2];
+
+            /** @var \Eloquent $model */
+            $model = $data[0];
+
             list($listener, $method) = explode('@', $listener);
 
             $listener = app()->make($listener);
-            $listener->$method($eventName, $data);
+            $listener->$method($eventName, $modelName, $model);
         });
-
     }
 }
