@@ -18,6 +18,6 @@ class EloquentListener
 
     public function subscribe(Dispatcher $event)
     {
-        EventHelper::listenAllEloquentEvent($event, __CLASS__ . '@onStorableEvent');
+        EventHelper::listenAllEloquentEvent($event, __CLASS__ . '@storeEloquentEvent');
     }
 }
