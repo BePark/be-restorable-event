@@ -12,7 +12,7 @@ class EloquentListener
 {
     public function storeEloquentEvent(string $eventName, string $modelName, Model $model)
     {
-        Event::createFromEloquentEvent($modelName . ':' . $eventName, $model);
+        Event::createFromEloquentEvent($modelName . ':' . $eventName, $modelName, $model);
     }
 
     public function subscribe(Dispatcher $event)

@@ -34,11 +34,11 @@ class Event extends Model
 		]);
 	}
 
-	public static function createFromEloquentEvent(string $name, Model $data): self
+	public static function createFromEloquentEvent(string $name, string $modelClass, Model $data): self
     {
         return self::create([
             'name' => $name,
-            'data' => $data
+            'data' => [$modelClass => $data]
         ]);
     }
 
