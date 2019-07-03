@@ -41,13 +41,16 @@ class EventHelper
             $eventName = $matches[1];
             $modelName = $matches[2];
 
-            /** @var \Eloquent $model */
-            $model = $data[0];
+            if(in_array($eventName, config('eventer.eloquent_event_to_listen'))) {
 
-            list($listener, $method) = explode('@', $listener);
+                /** @var \Eloquent $model */
+                $model = $data[0];
 
-            $listener = app()->make($listener);
-            $listener->$method($eventName, $modelName, $model);
+                list($listener, $method) = explode('@', $listener);
+
+                $listener = app()->make($listener);
+                $listener->$method($eventName, $modelName, $model);
+            }
         });
     }
 }
