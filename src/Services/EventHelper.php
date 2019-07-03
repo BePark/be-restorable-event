@@ -41,7 +41,7 @@ class EventHelper
             $eventName = $matches[1];
             $modelName = $matches[2];
 
-            if(in_array($eventName, config('eventer.eloquent_event_to_listen'))) {
+            if(in_array($eventName, config('eventer.eloquent_event_to_listen')) && $modelName != Event::class) {
 
                 /** @var \Eloquent $model */
                 $model = $data[0];
