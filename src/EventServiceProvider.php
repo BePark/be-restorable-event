@@ -2,6 +2,7 @@
 
 namespace Bepark\Eventer;
 
+use Bepark\Eventer\Listeners\EloquentListener;
 use Bepark\Eventer\Listeners\StorableEventListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -22,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
 
         if(config('event.listen_on_eloquent', false))
         {
-
+            $this->subscribe[] = EloquentListener::class;
         }
 
         parent::boot();
